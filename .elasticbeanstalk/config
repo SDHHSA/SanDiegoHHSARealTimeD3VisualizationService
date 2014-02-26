@@ -1,0 +1,14 @@
+[global]
+ApplicationName=Astelytics
+AwsCredentialFile=C:\Users\Michael\.elasticbeanstalk\aws_credential_file
+DevToolsEndpoint=git.elasticbeanstalk.us-west-1.amazonaws.com
+EnvironmentName=Astelytics-env
+EnvironmentTier=WebServer::Standard::1.0
+EnvironmentType=SingleInstance
+InstanceProfileName=aws-elasticbeanstalk-ec2-role
+OptionSettingFile=C:\Users\Michael\Dropbox\Projects\Code\Programs\Astelytics\.elasticbeanstalk\optionsettings.Astelytics-env
+RdsEnabled=No
+Region=us-west-1
+ServiceEndpoint=https://elasticbeanstalk.us-west-1.amazonaws.com
+SolutionStack=32bit Amazon Linux 2013.09 running Python 2.7
+

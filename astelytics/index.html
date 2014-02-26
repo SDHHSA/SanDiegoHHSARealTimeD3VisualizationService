@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Visualization</title>
+        <link rel="stylesheet" href="/static/nv.d3.min.css" type="text/css" rel="stylesheet">
+        <style type="text/css">
+            body{
+                padding:1em;
+            }
+            
+            #wrapper{
+                max-width:60em;
+                margin:1em auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Testing</h1>
+            <div id="playground"><svg height="300px"></svg></div>
+        </div>
+        
+        <script src="/static/jquery-2.1.0.min.js" type="text/javascript"></script>
+        <script src="/static/d3.v3.min.js" type="text/javascript"></script>
+        <script src="/static/nv.d3.min.js" type="text/javascript"></script>
+        <script src="/static/visualize.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                function formatData(data) {
+                    var arr = []
+                    for (i in data) {
+                        arr.push({ "label": i, "value": data[i] });
+                    }
+                    
+                    return [{
+                        key: "Testing",
+                        values: arr
+                    }];
+                }
+            
+                var chart = makeBarChart();
+                
+                setInterval(function() {
+                    $.ajax({
+                        url: 'http://localhost:5000/survey/analyze/1', 
+                        dataType: "json",
+                        success: function(json) {
+                            var formatted = formatData(json["testing"]);
+                            updateChart('#playground svg', chart, formatted);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            alert(textStatus + " | " + errorThrown);
+                        }
+                    });
+                    /*$.get(
+                        'http://localhost:5000/survey/analyze/1',
+                        function(json) {
+                            var formatted = formatData(json);
+                            alert(formatted);
+                            updateChart('#playground svg', chart, formatted);
+                        }
+                    );*/
+                }, 500);
+                
+            });
+            
+            
+            /*
+            function exampleBarData(x) {
+                return [{
+                    key: "Testing",
+                    values: [
+                        { "label": "a", "value": 100 + x },
+                        { "label": "b", "value": 200 + x },
+                        { "label": "c", "value": 300 + x },
+                        { "label": "d", "value": 400 + x },
+                        { "label": "e", "value": 500 + x },
+                        { "label": "f", "value": 600 + x }
+                    ]
+                }];
+            }
+            
+            function examplePieData(x) {
+                return exampleBarData(x)[0].values;
+            }
+            
+            //var exampleData = exampleBarData;
+            //var chart = makeBarChart();
+            
+            var exampleData = examplePieData;
+            var chart = makeDonutChart();
+            
+            updateChart('#playground svg', chart, exampleData(0));
+            
+            var counter = 0;
+            
+            document.getElementById('increase').onclick = function() {
+                counter += 100;
+                updateChart('#playground svg', chart, exampleData(counter));
+            };
+            document.getElementById('decrease').onclick = function() {
+                counter -= 100;
+                updateChart('#playground svg', chart, exampleData(counter));
+            };*/
+        </script>
+    </body>
+</html>

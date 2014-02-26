@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Testing</title>
+        <link rel="stylesheet" href="nv.d3.min.css" type="text/css" rel="stylesheet">
+        <style type="text/css">
+            body{
+                padding:1em;
+            }
+            
+            #wrapper{
+                max-width:60em;
+                margin:1em auto;
+            }   
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <form name="testing" action="http://localhost:5000/survey/1" method="post">
+                <p>Question 1</p>
+                A: <input type="radio" name="testing", value="A"> <br>
+                B: <input type="radio" name="testing", value="B"> <br>
+                C: <input type="radio" name="testing", value="C"> <br>
+                <p>Question 2</p>
+                A: <input type="radio" name="testing2", value="A"> <br>
+                B: <input type="radio" name="testing2", value="B"> <br>
+                C: <input type="radio" name="testing2", value="C"> <br>
+                <input type="submit" value = "submit">
+            </form>
+        </div>
+    </body>
+</html>
+

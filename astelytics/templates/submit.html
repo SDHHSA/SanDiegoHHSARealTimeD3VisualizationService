@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Test Submit{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock%}
+
+{% block content %}
+    <h1>Test Submit</h1>
+    
+    <form name="testing" action="/survey/1" method="post">
+        <p>Question 1</p>
+        A: <input type="radio" name="testing", value="A"> <br>
+        B: <input type="radio" name="testing", value="B"> <br>
+        C: <input type="radio" name="testing", value="C"> <br>
+        <p>Question 2</p>
+        A: <input type="radio" name="testing2", value="A"> <br>
+        B: <input type="radio" name="testing2", value="B"> <br>
+        C: <input type="radio" name="testing2", value="C"> <br>
+        <p>Question 3</p>
+        <textarea type="textarea" rows="10" cols="40" name="testing3"></textarea> <br>
+        <input type="submit" value = "submit">
+    </form>
+{% endblock %}

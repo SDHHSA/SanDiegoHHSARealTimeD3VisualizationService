@@ -1,0 +1,42 @@
+html, body, ol, ul, form{
+	margin: 0;
+	padding: 0;
+	font-weight: 300;
+}
+body{
+	/*font-family: "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;	*/
+	font-family: Helvetica,Arial,sans-serif;
+	font-size: 14px;
+}
+a{
+	color: #339FBE;
+	text-decoration: none;
+}
+
+#header{
+	width: 100%;
+	height: 63px;
+	background: #339fbe;
+	box-shadow: 0 0 8px 2px #9D9D9D;	
+}
+
+#logo{
+	width: 240px;
+	height: 60px;
+	margin: 0 auto;
+	display:block;
+}
+	#dashBoardLogo{
+		margin: -50px 200px 0 0;
+		float: right;
+		opacity: 0.8;
+	}
+	#dashBoardLogo:hover{
+		opacity: 1.0;
+	}
+#container{
+	width: 764px;
+	margin: 0 auto;
+    padding: 0 1em;
+	min-height: 200px;
+}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Question{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for'(static', filename='nv.d3.min.css') }}" type="text/css" rel="stylesheet">
+{% endblock%}
+
+{% block content %}
+    <h1>{{ result['question'] }}</h1>
+    
+    <div id="{{ result['unique_id'] }}" class="response {{ result['type'] }}">
+        <select name="view-change" class="view-change">
+        </select>
+        
+        <div class="chart {{ result['type'] }}">
+            <svg height="300px"></svg>
+        </div>
+    </div>
+        
+    <script src="{{ url_for('static', filename='jquery-2.1.0.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='d3.v3.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='nv.d3.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='d3.layout.cloud.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='visualize.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            updater = new Updater('{{ server_id }}', 10000);
+            
+            updater.attach(
+                '{{ result['unique_id'] }}', 
+                '{{ result['question'] }}', 
+                '{{ result['type'] }}', 
+                'bar');
+            
+            updater.start();
+        });
+    </script>
+{% endblock %}

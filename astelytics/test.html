@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Visualization</title>
+        <link rel="stylesheet" href="nv.d3.min.css" type="text/css" rel="stylesheet">
+        <style type="text/css">
+            body{
+                padding:1em;
+            }
+            
+            #wrapper{
+                max-width:60em;
+                margin:1em auto;
+            }   
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Testing</h1>
+            <div id="sanity"></div>
+            <div id="playground"></div>
+            <div id="playground2"><svg height="500px"></svg></div>
+        </div>
+        
+        <script src="d3.v3.min.js" type="text/javascript"></script>
+        <script src="nv.d3.min.js" type="text/javascript"></script>
+        <script src="dimple.v1.1.3.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            function testDimple() {
+                function dimpleBarChart(target, data) {
+                    var svg = dimple.newSvg(target, 800, 600);
+                    
+                    var chart = new dimple.chart(svg, data);
+                    chart.addCategoryAxis("x", "Category");
+                    chart.addMeasureAxis("y", "Value");
+                    chart.addSeries(null, dimple.plot.bar);
+                    chart.draw();
+                    
+                    return chart;
+                }
+                
+                //sanityTest('#sanity');
+                var chart = dimpleBarChart('#playground', [
+                    { "Category": "a", "Value": 100 },
+                    { "Category": "b", "Value": 200 },
+                    { "Category": "c", "Value": 300 },
+                    { "Category": "d", "Value": 400 },
+                    { "Category": "e", "Value": 500 },
+                ]);
+                
+                chart.data = [
+                    { "Category": "a", "Value": 200 },
+                    { "Category": "b", "Value": 300 },
+                    { "Category": "c", "Value": 400 },
+                    { "Category": "d", "Value": 500 },
+                    { "Category": "e", "Value": 600 },
+                    { "Category": "f", "Value": 700 },
+                ];
+                
+                chart.draw();
+            }
+            
+            function testNVD3BarChart() {
+                function exampleData(x) {
+                    return [
+                        {
+                            key: "Testing",
+                            values: [
+                                { "label": "a", "value": 100 + x },
+                                { "label": "b", "value": 200 + x },
+                                { "label": "c", "value": 300 + x },
+                                { "label": "d", "value": 400 + x },
+                                { "label": "e", "value": 500 + x },
+                                { "label": "f", "value": 600 + x }
+                            ]
+                        }
+                    ]
+                }
+                
+                function makeChart() {
+                    var chart = nv.models.discreteBarChart()
+                        .x(function(d) { return d.label })
+                        .y(function(d) { return d.value })
+                        .staggerLabels(true)
+                        .tooltips(true)
+                        .showValues(true);
+                        
+                    d3.select('#playground2 svg')
+                        .datum(exampleData(0))
+                        .transition().duration(500)
+                        .call(chart);
+                        
+                    nv.utils.windowResize(chart.update);
+                    
+                    return chart;
+                }
+                
+                var chart = makeChart();
+                nv.addGraph(chart);
+                
+                alert("Delay...");
+                
+                d3.select('#playground2 svg')
+                    .datum(exampleData(100))
+                    .transition().duration(500)
+                    .call(chart);
+            }
+            
+            testNVD3BarChart();
+        </script>
+    </body>
+</html>

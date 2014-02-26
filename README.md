@@ -33,3 +33,7 @@ Astelytics API
 
 <pre>POST
 /user/single</pre>
+
+##### Brought to you by
+###### Michael Lee, University of Washington
+###### Rex Fatahi, University of Connecticut
